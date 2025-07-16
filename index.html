@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+
+  <title>Conference ticket generator</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background-layer">
+    <img src="./assets/images/background-desktop.png" class="bg-img bg-base" alt="" aria-hidden="true">
+    <img src="./assets/images/pattern-lines.svg" class="bg-img bg-lines" alt="" aria-hidden="true">
+    <img src="./assets/images/pattern-circle.svg" class="bg-img bg-circle" alt="" aria-hidden="true">
+    <img src="./assets/images/pattern-squiggly-line-top.svg" class="bg-img bg-top-squiggle" alt="" aria-hidden="true">
+    <img src="./assets/images/pattern-squiggly-line-bottom-desktop.svg" class="bg-img bg-bottom-squiggle desktop-only"
+      alt="" aria-hidden="true">
+    <img src="./assets/images/pattern-squiggly-line-bottom-mobile-tablet.svg"
+      class="bg-img bg-bottom-squiggle mobile-tablet-only" alt="" aria-hidden="true">
+  </div>
+  <div class="form-container">
+    <img src="./assets/images/logo-full.svg" alt="" />
+    <!-- Form starts -->
+
+    <h1>Your Journey to Coding Conf 2025 Starts Here!</h1>
+
+    <p>Secure your spot at next year's biggest coding conference.</p>
+      <div id="form-errors" role="alert" aria-live="polite"></div>
+      <form id="ticket-form" enctype="multipart/form-data">
+        <!-- Upload Avatar -->
+        <div class="fields-container">
+          <fieldset>
+            <legend>Upload Avatar</legend>
+
+            <label for="avatar" class="upload-box">
+              <input type="file" id="avatar" name="avatar" accept="image/jpeg, image/png" aria-describedby="avatar-help"
+                required />
+              <img src="./assets/images/icon-upload.svg" alt="" />
+              <span>Drag and drop or click to upload</span>
+            </label>
+            <div class="info-container">
+              <img src="./assets/images/icon-info.svg" alt="" />
+              <small id="avatar-help">Upload your photo (JPG or PNG, max size: 500KB).</small>
+            </div>
+          </fieldset>
+
+          <!-- Full Name -->
+          <label for="full-name">Full Name</label>
+          <input type="text" id="full-name" name="fullName" required />
+
+          <!-- Email Address -->
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="example@email.com" required />
+
+          <!-- GitHub Username -->
+          <label for="github">GitHub Username</label>
+          <input type="text" id="github" name="github" placeholder="@yourusername" pattern="^@[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
+            required />
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn-submit">Generate My Ticket</button>
+        </div>
+      </form>
+  </div>
+  <!-- Generated tickets starts -->
+  <div class="ocultar ticket-container">
+    Congrats, <!-- Full Name -->! Your ticket is ready.
+
+    We've emailed your ticket to <!-- Email Address --> and will send updates in the run up to the event.
+
+    Coding Conf
+    Jan 31, 2025 / Austin, TX
+
+    <!-- Generated tickets ends -->
+  </div>
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+
+  <script src="./index.js"></script>
+</body>
+
+</html>

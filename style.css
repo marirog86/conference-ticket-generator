@@ -1,0 +1,203 @@
+.ocultar {
+    display: none;
+}
+
+body {
+    margin: 0;
+    font-family: 'Space Mono', monospace;
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: #1c003d;
+    color: white;
+}
+
+.background-layer {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.bg-img {
+    position: absolute;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* Fondo base */
+.bg-base {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* Líneas verticales */
+.bg-lines {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    z-index: 2;
+}
+
+/* Círculo */
+.bg-circle {
+    bottom: 300px;
+    right: 400px;
+    width: 200px;
+    z-index: 3;
+}
+
+/* Curvas */
+.bg-top-squiggle {
+    top: 20px;
+    right: 0;
+    width: 400px;
+    z-index: 4;
+}
+
+.bg-bottom-squiggle {
+    bottom: 0;
+    left: 0;
+    width: 600px;
+    z-index: 4;
+}
+
+/* Visibilidad según dispositivo */
+.desktop-only {
+    display: block;
+}
+
+.mobile-tablet-only {
+    display: none;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .bg-base {
+        content: url('./assets/images/background-tablet.png');
+    }
+
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-tablet-only {
+        display: block;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .bg-base {
+        content: url('./assets/images/background-mobile.png');
+    }
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.fields-container {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    justify-content: center;
+}
+
+.fields-container label {
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.fields-container input {
+    margin-bottom: 5px;
+    background-color: hsla(246, 15%, 58%, 0.158);
+    color: hsl(252, 6%, 83%);
+    padding: 10px;
+    border-radius: 10px;
+    font-family: 'Space Mono', monospace;
+    border: 1px solid hsl(245, 15%, 58%);
+}
+
+.fields-container button {
+    margin-top: 10px;
+    padding: 10px;
+    font-family: 'Space Mono', monospace;
+    border-radius: 10px;
+    background-color: hsl(7, 88%, 67%);
+    color: hsl(248, 70%, 10%);
+    font-weight: bold;
+    font-size: 16px;
+    border: 1px solid hsl(245, 15%, 58%);
+    cursor: pointer;
+}
+
+.fields-container button:hover {
+    background-color: hsl(7, 71%, 60%);
+}
+
+.info-container {
+    display: flex;
+}
+
+.info-container img {
+    margin-right: 5px;
+}
+
+.upload-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 270px;
+    border: 2px dashed hsl(227, 20%, 80%);
+    border-radius: 12px;
+    cursor: pointer;
+    background-color: hsla(246, 15%, 58%, 0.158);
+    color: hsl(227, 10%, 50%);
+    font-size: 0.95rem;
+    text-align: center;
+    padding: 1rem;
+    margin-bottom: 10px;
+    transition: border-color 0.3s;
+}
+
+.upload-box:hover {
+    border-color: hsl(227, 75%, 44%);
+}
+
+/* Ocultar input de archivo nativo pero seguir accesible */
+.upload-box input[type="file"] {
+    display: none;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.info-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: hsl(227, 10%, 50%);
+}
+
+.error-msg {
+    color: hsl(7, 88%, 67%);
+    background: hsla(0, 0%, 100%, 0.05);
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    font-weight: bold;
+}
