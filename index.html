@@ -7,6 +7,9 @@
   <!-- displays site properly based on user's device -->
   <link rel="stylesheet" href="./style.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
 
   <title>Conference ticket generator</title>
 
@@ -51,11 +54,14 @@
             <label for="avatar" class="upload-box">
               <input type="file" id="avatar" name="avatar" accept="image/jpeg, image/png" aria-describedby="avatar-help"
                 required />
-              <img src="./assets/images/icon-upload.svg" alt="" />
-              <span>Drag and drop or click to upload</span>
+              <div class="avatar-preview-container" aria-hidden="true">
+                <img id="avatar-preview" alt="Image preview" class="avatar-preview ocultar" />
+              </div>
+              <img class="icon-upload" src="./assets/images/icon-upload.svg" alt="" />
+              <span class="text-upload">Drag and drop or click to upload</span>
             </label>
             <div class="info-container">
-              <img src="./assets/images/icon-info.svg" alt="" />
+              <img  src="./assets/images/icon-info.svg" alt="" />
               <small id="avatar-help">Upload your photo (JPG or PNG, max size: 500KB).</small>
             </div>
           </fieldset>
@@ -80,14 +86,7 @@
   </div>
   <!-- Generated tickets starts -->
   <div class="ocultar ticket-container">
-    Congrats, <!-- Full Name -->! Your ticket is ready.
 
-    We've emailed your ticket to <!-- Email Address --> and will send updates in the run up to the event.
-
-    Coding Conf
-    Jan 31, 2025 / Austin, TX
-
-    <!-- Generated tickets ends -->
   </div>
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.

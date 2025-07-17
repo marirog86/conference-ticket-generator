@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const errorContainer = document.getElementById("form-errors");
     const ticketContainer = document.querySelector(".ticket-container");
     const formContainer = document.querySelector(".form-container");
+    const avatarInput = document.getElementById('avatar');
+    const avatarPreview = document.getElementById('avatar-preview');
 
     form.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -52,17 +54,70 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Éxito: ocultar formulario, mostrar ticket
-        formContainer.classList.add("ocultar");
-        ticketContainer.classList.remove("ocultar");
+    // Dentro de reader.onload del avatar:
+const reader = new FileReader();
 
-        // Rellenar contenido del ticket si corresponde (opcional)
-        ticketContainer.innerHTML = `
-        <h2>Congrats, ${name}!</h2>
-        <p>Your ticket is ready.</p>
-        <p>We've emailed your ticket to <strong>${email}</strong> and will send updates as the event approaches.</p>
-        <h3>Coding Conf</h3>
-        <p>Jan 31, 2025 / Austin, TX</p>
+reader.onload = function (e) {
+    const avatarSrc = e.target.result;
+
+    // Ocultar formulario y mostrar ticket
+    formContainer.classList.add("ocultar");
+    ticketContainer.classList.remove("ocultar");
+
+    // Ticket HTML con avatar
+    ticketContainer.innerHTML = `
+        <img src='./assets/images/logo-full.svg' alt='' />
+        <h2>Congrats, <span class='nombre'>${name}</span>! </h2>
+        <h3>Your ticket is ready.</h3>
+        <p class='p-mail'>We've emailed your ticket to <span>${email}</span> and will send updates as the event approaches.</p>
+        <div class="ticket">
+            <img src="./assets/images/pattern-ticket.svg" alt="" class="pattern-deco" aria-hidden="true" />
+            <div class="ticket-header">
+                <img src="./assets/images/logo-full.svg" alt="Coding Conf Logo" />
+                <p>Jan 31, 2025 / Austin, TX</p>
+            </div>
+            <div class="ticket-body">
+                <img class="ticket-avatar" src="${avatarSrc}" alt="User avatar" />
+                <div class="ticket-info">
+                    <p class="ticket-name">${name}</p>
+                    <p class="ticket-github">${github}</p>
+                </div>
+            </div>
+        </div>
     `;
-    });
+};
+
+reader.readAsDataURL(avatar);
+form.reset();
+avatarPreview.src = '';
+avatarPreview.classList.add('ocultar');
+icon.classList.remove('ocultar');
+text.classList.remove('ocultar');
+
+});
+});
+
+document.getElementById('avatar').addEventListener('change', function () {
+    const file = this.files[0];
+    const preview = document.getElementById('avatar-preview');
+    const icon = document.querySelector('.icon-upload');
+    const text = document.querySelector('.text-upload');
+
+    if (file && (file.type === 'image/jpeg' || file.type === 'image/png')) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+            preview.classList.remove('ocultar');
+            icon.classList.add('ocultar');
+            text.classList.add('ocultar')
+        };
+
+        reader.readAsDataURL(file);
+    } else {
+        preview.src = '';
+        preview.classList.add('ocultar');
+        icon.classList.remove('ocultar');
+        text.classList.remove('ocultar');
+    }
 });
