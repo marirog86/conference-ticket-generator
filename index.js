@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <small id="avatar-help">GitHub username must start with @ and contain only letters, numbers, or hyphens.</small>`;
         }
 
-        
+
 
         if (!avatar) {
             document.getElementById('error-avatar').innerHTML = `<img  src="./assets/images/icon-info.svg" alt="" />
@@ -121,6 +121,10 @@ document.getElementById('avatar').addEventListener('change', function () {
     const preview = document.getElementById('avatar-preview');
     const icon = document.querySelector('.icon-upload');
     const text = document.querySelector('.text-upload');
+    const avatarButtons = document.getElementById('avatar-buttons');
+    const btnRemoveAvatar = document.getElementById('btn-remove-avatar');
+    const btnChangeAvatar = document.getElementById('btn-change-avatar');
+    const avatarInput = document.getElementById('avatar');
 
     if (file && (file.type === 'image/jpeg' || file.type === 'image/png')) {
         const reader = new FileReader();
@@ -129,10 +133,25 @@ document.getElementById('avatar').addEventListener('change', function () {
             preview.src = e.target.result;
             preview.classList.remove('ocultar');
             icon.classList.add('ocultar');
-            text.classList.add('ocultar')
+            text.classList.add('ocultar');
+            avatarButtons.classList.remove('ocultar');
         };
 
         reader.readAsDataURL(file);
+        // Botón "Remove"
+        btnRemoveAvatar.addEventListener('click', () => {
+            avatarInput.value = ''; // limpia el input file
+            preview.src = '';
+            preview.classList.add('ocultar');
+            avatarButtons.classList.add('ocultar');
+            icon.classList.remove('ocultar');
+            text.classList.remove('ocultar');
+        });
+
+        // Botón "Change"
+        btnChangeAvatar.addEventListener('click', () => {
+            avatarInput.click(); // dispara el input de tipo file para seleccionar una nueva imagen
+        });
     } else {
         preview.src = '';
         preview.classList.add('ocultar');

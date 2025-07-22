@@ -168,7 +168,20 @@ body {
 }
 
 .upload-box:hover {
-    border-color: hsl(227, 75%, 44%);
+    background-color: hsla(246, 15%, 58%, 0.452);
+}
+
+.avatar-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.avatar-buttons button {
+    font-size: 11px ;
+    background-color: hsl(227, 10%, 50%) ;
+    color: aliceblue;
+    padding: 5px;
 }
 
 /* Ocultar input de archivo nativo pero seguir accesible */
@@ -205,7 +218,7 @@ fieldset {
     border: 1px solid hsl(245, 15%, 58%);
 }
 
-.ticket-container{
+.ticket-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -213,7 +226,7 @@ fieldset {
     margin: 20px;
 }
 
-.ticket-container h2{
+.ticket-container h2 {
     font-family: "Inconsolata", monospace;
     color: hsl(0, 0%, 100%);
     font-size: 50px;
@@ -222,20 +235,20 @@ fieldset {
 
 }
 
-.ticket-container h3{
+.ticket-container h3 {
     font-family: "Inconsolata", monospace;
     color: hsl(0, 0%, 100%);
     font-size: 50px;
     margin-top: 0px;
 }
 
-.p-mail{
+.p-mail {
     font-size: 16px;
     width: 500px;
     text-align: center;
 }
 
-.p-mail span{
+.p-mail span {
     color: hsl(7, 88%, 67%);
 }
 
@@ -245,7 +258,7 @@ fieldset {
     background: linear-gradient(to right, hsl(7, 86%, 67%), hsl(0, 0%, 100%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text; 
+    background-clip: text;
     color: transparent;
 }
 
@@ -260,16 +273,16 @@ fieldset {
     display: flex;
     justify-content: space-around;
     width: 100%;
-    max-width: 500px; 
+    max-width: 500px;
     box-sizing: border-box;
 }
 
-.ticket-main{
+.ticket-main {
     display: flex;
     flex-direction: column;
 }
 
-.ticket-id{
+.ticket-id {
     transform: rotate(90deg);
     color: hsla(252, 6%, 83%, 0.493);
     font-size: 20px;
@@ -286,10 +299,11 @@ fieldset {
     pointer-events: none;
 }
 
-.ticket-header{
+.ticket-header {
     position: relative;
     z-index: 1;
 }
+
 .ticket-body {
     position: relative;
     z-index: 1;
