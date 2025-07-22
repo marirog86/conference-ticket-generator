@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         reader.onload = function (e) {
             const avatarSrc = e.target.result;
+            const ticketId = generarID();
 
             // Ocultar formulario y mostrar ticket
             formContainer.classList.add("ocultar");
@@ -87,6 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <p class='p-mail'>We've emailed your ticket to <span>${email}</span> and will send updates as the event approaches.</p>
         <div class="ticket">
             <img src="./assets/images/pattern-ticket.svg" alt="" class="pattern-deco" aria-hidden="true" />
+            <div class='ticket-main'>
             <div class="ticket-header">
                 <img src="./assets/images/logo-full.svg" alt="Coding Conf Logo" />
                 <p>Jan 31, 2025 / Austin, TX</p>
@@ -98,6 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p class="ticket-github">${github}</p>
                 </div>
             </div>
+            </div>
+            <p class="ticket-id"># ${ticketId}</p>
         </div>
     `;
         };
@@ -136,3 +140,7 @@ document.getElementById('avatar').addEventListener('change', function () {
         text.classList.remove('ocultar');
     }
 });
+
+function generarID() {
+    return (Date.now().toString(36) + Math.random().toString(36).substr(2, 5)).toUpperCase();
+}

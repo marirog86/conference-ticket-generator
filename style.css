@@ -258,10 +258,22 @@ fieldset {
     position: relative;
     overflow: hidden;
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
     width: 100%;
     max-width: 500px; 
     box-sizing: border-box;
+}
+
+.ticket-main{
+    display: flex;
+    flex-direction: column;
+}
+
+.ticket-id{
+    transform: rotate(90deg);
+    color: hsla(252, 6%, 83%, 0.493);
+    font-size: 20px;
+    margin: 0;
 }
 
 .pattern-deco {
