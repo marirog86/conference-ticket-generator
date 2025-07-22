@@ -44,8 +44,8 @@
     <h1>Your Journey to Coding Conf 2025 Starts Here!</h1>
 
     <p>Secure your spot at next year's biggest coding conference.</p>
-      <div id="form-errors" role="alert" aria-live="polite"></div>
-      <form id="ticket-form" enctype="multipart/form-data">
+      <div id="form-errors" role="alert" aria-live="polite" class="ocultar"></div>
+      <form id="ticket-form" enctype="multipart/form-data" novalidate>
         <!-- Upload Avatar -->
         <div class="fields-container">
           <fieldset>
@@ -64,21 +64,22 @@
               <img  src="./assets/images/icon-info.svg" alt="" />
               <small id="avatar-help">Upload your photo (JPG or PNG, max size: 500KB).</small>
             </div>
+            <div class="error-msg" id="error-avatar"></div>
           </fieldset>
 
           <!-- Full Name -->
           <label for="full-name">Full Name</label>
           <input type="text" id="full-name" name="fullName" required />
-
+          <div class="error-msg" id="error-name"></div>
           <!-- Email Address -->
           <label for="email">Email Address</label>
           <input type="email" id="email" name="email" placeholder="example@email.com" required />
-
+          <div class="error-msg" id="error-email"></div>
           <!-- GitHub Username -->
           <label for="github">GitHub Username</label>
           <input type="text" id="github" name="github" placeholder="@yourusername" pattern="^@[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
             required />
-
+          <div class="error-msg" id="error-github"></div>
           <!-- Submit Button -->
           <button type="submit" class="btn-submit">Generate My Ticket</button>
         </div>

@@ -191,11 +191,8 @@ fieldset {
 
 .error-msg {
     color: hsl(7, 88%, 67%);
-    background: hsla(0, 0%, 100%, 0.05);
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 8px;
-    font-weight: bold;
+    padding: 5px;
+    margin: 5px 0;
 }
 
 

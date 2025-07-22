@@ -1,71 +1,86 @@
 document.addEventListener("DOMContentLoaded", () => {
+    //DomContentLoaded para asegurarse que el dom está totalmente cargado. Alternativa, poner el script al final del HTML
     const form = document.getElementById("ticket-form");
     const errorContainer = document.getElementById("form-errors");
     const ticketContainer = document.querySelector(".ticket-container");
     const formContainer = document.querySelector(".form-container");
     const avatarInput = document.getElementById('avatar');
     const avatarPreview = document.getElementById('avatar-preview');
+    const infoContainer = document.querySelector('.info-container');
 
     form.addEventListener("submit", (e) => {
         e.preventDefault();
-        errorContainer.innerHTML = ""; // Limpiar errores
-        errorContainer.classList.remove("ocultar");
+        // Limpiar errores anteriores
+        document.querySelectorAll('.error-msg').forEach(div => div.textContent = '');
+        infoContainer.classList.remove('ocultar');
 
-        const name = document.getElementById("full-name").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const github = document.getElementById("github").value.trim();
-        const avatar = document.getElementById("avatar").files[0];
+        // Obtener valores
+        const name = document.getElementById('full-name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const github = document.getElementById('github').value.trim();
+        const avatarInput = document.getElementById('avatar');
+        const avatar = avatarInput.files[0];
 
-        const errores = [];
-
-        // Validación de campos
-        if (!name || !email || !github || !avatar) {
-            errores.push("Please fill in all fields.");
-        }
-
-        // Validación de email
+        // Regex para validar email y GitHub
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (email && !emailRegex.test(email)) {
-            errores.push("Please enter a valid email address.");
+        const githubRegex = /^@[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$/;
+
+        // Validaciones
+        if (!name) {
+            document.getElementById('error-name').innerHTML = `<img  src="./assets/images/icon-info.svg" alt="" />
+            <small id="avatar-help">Please enter your full name.</small>`;
         }
 
-        // Validación de GitHub (@username)
-        const githubRegex = /^@[\w-]+$/;
-        if (github && !githubRegex.test(github)) {
-            errores.push("GitHub username must start with @ and contain only letters, numbers, underscores or hyphens.");
+        if (!email) {
+            document.getElementById('error-email').innerHTML = `<img  src="./assets/images/icon-info.svg" alt="" />
+            <small id="avatar-help">Please enter your email address.</small>`;
+        } else if (!emailRegex.test(email)) {
+            document.getElementById('error-email').innerHTML = `<img  src="./assets/images/icon-info.svg" alt="" />
+            <small id="avatar-help">Please enter a valid email address.</small>`;
         }
 
-        // Validación de avatar
-        if (avatar) {
-            const formatosPermitidos = ["image/jpeg", "image/png"];
-            if (!formatosPermitidos.includes(avatar.type)) {
-                errores.push("Avatar must be a JPG or PNG image.");
+        if (!github) {
+            document.getElementById('error-github').innerHTML = `<img  src="./assets/images/icon-info.svg" alt="" />
+            <small id="avatar-help">Please enter your GitHub username.</small>`;
+        } else if (!githubRegex.test(github)) {
+            document.getElementById('error-github').innerHTML = `<img  src="./assets/images/icon-info.svg" alt="" />
+            <small id="avatar-help">GitHub username must start with @ and contain only letters, numbers, or hyphens.</small>`;
+        }
+
+        
+
+        if (!avatar) {
+            document.getElementById('error-avatar').innerHTML = `<img  src="./assets/images/icon-info.svg" alt="" />
+                <small id="avatar-help">Please upload an avatar.</small>`;
+            infoContainer.classList.add('ocultar');
+        } else {
+            if (!['image/jpeg', 'image/png'].includes(avatar.type)) {
+                document.getElementById('error-avatar').innerHTML = `<img  src="./assets/images/icon-info.svg" alt="" />
+                <small id="avatar-help">Avatar must be a JPG or PNG image.</small>`;
+                infoContainer.classList.add('ocultar');
+            } else if (avatar.size > 500 * 1024) {
+                document.getElementById('error-avatar').innerHTML = `<img  src="./assets/images/icon-info.svg" alt="" />
+                <small id="avatar-help">Avatar must be less than 500KB.</small>`;
+                infoContainer.classList.add('ocultar');
             }
-            if (avatar.size > 500 * 1024) {
-                errores.push("Avatar must be less than 500KB.");
-            }
         }
 
-        // Mostrar errores si hay
-        if (errores.length > 0) {
-            errorContainer.innerHTML = errores
-                .map((err) => `<p class="error-msg">${err}</p>`)
-                .join("");
-            return;
-        }
+        // Verificar si hay errores
+        const hayErrores = Array.from(document.querySelectorAll('.error-msg')).some(div => div.textContent !== '');
+        if (hayErrores) return;
 
-    // Dentro de reader.onload del avatar:
-const reader = new FileReader();
+        // Dentro de reader.onload del avatar:
+        const reader = new FileReader();
 
-reader.onload = function (e) {
-    const avatarSrc = e.target.result;
+        reader.onload = function (e) {
+            const avatarSrc = e.target.result;
 
-    // Ocultar formulario y mostrar ticket
-    formContainer.classList.add("ocultar");
-    ticketContainer.classList.remove("ocultar");
+            // Ocultar formulario y mostrar ticket
+            formContainer.classList.add("ocultar");
+            ticketContainer.classList.remove("ocultar");
 
-    // Ticket HTML con avatar
-    ticketContainer.innerHTML = `
+            // Ticket HTML con avatar
+            ticketContainer.innerHTML = `
         <img src='./assets/images/logo-full.svg' alt='' />
         <h2>Congrats, <span class='nombre'>${name}</span>! </h2>
         <h3>Your ticket is ready.</h3>
@@ -85,16 +100,16 @@ reader.onload = function (e) {
             </div>
         </div>
     `;
-};
+        };
 
-reader.readAsDataURL(avatar);
-form.reset();
-avatarPreview.src = '';
-avatarPreview.classList.add('ocultar');
-icon.classList.remove('ocultar');
-text.classList.remove('ocultar');
+        reader.readAsDataURL(avatar);
+        form.reset();
+        avatarPreview.src = '';
+        avatarPreview.classList.add('ocultar');
+        icon.classList.remove('ocultar');
+        text.classList.remove('ocultar');
 
-});
+    });
 });
 
 document.getElementById('avatar').addEventListener('change', function () {
